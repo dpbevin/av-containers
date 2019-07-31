@@ -1,0 +1,4 @@
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2
+COPY Release/ app/
+ENV MESSAGE_FROM_ENV Hello from Australia!
+ENTRYPOINT ["dotnet", "app/ProductApi.dll"]

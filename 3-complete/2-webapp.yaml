@@ -1,0 +1,48 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: productapi-service
+  labels:
+    app: productapi
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 8123
+    targetPort: 80
+  selector:
+    app: productapi
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: productapi
+  labels:
+    app: productapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: productapi
+  template:
+    metadata:
+      labels:
+        app: productapi
+    spec:
+      containers:
+      - name: productapi
+        image: techtopics/productapi:v2
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        env:
+        - name: MY_SERVER
+          value: productdb-service
+        - name: MY_USER
+          value: "sa"
+        - name: MY_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: sqlserver-secret
+              key: SA_PASSWORD
+
+

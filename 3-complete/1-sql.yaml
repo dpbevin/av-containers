@@ -1,0 +1,42 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: productdb-service
+spec:
+  selector:
+    app: productdb
+  ports:
+  - protocol: TCP
+    port: 1433
+    targetPort: 1433
+  type: ClusterIP
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: productdb-deployment
+  labels:
+    app: productdb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: productdb
+  template:
+    metadata:
+      labels:
+        app: productdb
+    spec:
+      containers:
+      - name: productdb
+        image: mcr.microsoft.com/mssql/server:latest
+        ports:
+        - containerPort: 1433
+        env:
+        - name: ACCEPT_EULA
+          value: "Y"
+        - name: SA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: sqlserver-secret
+              key: SA_PASSWORD
