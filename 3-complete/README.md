@@ -27,7 +27,7 @@ The code in this sample has already been updated for you. See this guide for ste
 In the [Startup.cs](ProductApi/Startup.cs) file you'll see that the connection string is formed from three separate environment variables
 
 ```
- var server = this.Configuration["MY_SERVER"];
+var server = this.Configuration["MY_SERVER"];
 var user = this.Configuration["MY_USER"];
 var pass = this.Configuration["MY_PASSWORD"];
 
