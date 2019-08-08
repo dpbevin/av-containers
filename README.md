@@ -24,5 +24,5 @@ For the complete example, [click here](3-complete/README.md).
 
 Other resources:
 * [Istio](https://istio.io/) - Service Mesh
-* [Trafik](https://traefik.io/) - Reverse proxy/Load balancer
+* [Traefik](https://traefik.io/) - Reverse proxy/Load balancer
 * [KEDA](https://github.com/kedacore/keda) - Kubernetes-based Event Driven Autoscaling
